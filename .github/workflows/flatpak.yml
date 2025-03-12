@@ -17,6 +17,12 @@ jobs:
         bundle: palette.flatpak
         manifest-path: flatpak/berlin.giz.Quba.yml
         cache-key: flatpak-builder-${{ github.sha }}
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          */*
     # - uses: flatpak/flatpak-github-actions/flat-manager@v6
     #   name: "Deploy"
     #   with:
