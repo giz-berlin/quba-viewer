@@ -28,6 +28,10 @@ modules:
         npm_config_cache: /run/build/Quba/flatpak-node/npm-cache
         npm_config_offline: 'true'
     build-commands:
+      # Copy icon file
+      - mkdir -p /app/share/icons/hicolor/scalable/apps && cp assets/img/logoonly-flatpak.svg /app/share/icons/hicolor/scalable/apps/berlin.giz.Quba.svg
+      # Copy Desktop file
+      - mkdir -p /app/share/applications/ && cp flatpak/berlin.giz.Quba.desktop /app/share/applications/berlin.giz.Quba.desktop
       # Install npm dependencies
       - npm install --offline
       # Build the app; in this example the `dist` script

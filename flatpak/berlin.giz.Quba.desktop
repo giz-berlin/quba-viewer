@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Quba
+Exec=zypak-wrapper.sh /app/main/quba
+Type=Application
+Icon=berlin.giz.Quba
+Categories=Office;
