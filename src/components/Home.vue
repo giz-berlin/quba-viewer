@@ -120,7 +120,6 @@
 
     {{ t("welcomeNote1", {}, {locale: lang}) }}<br/>
     {{ t("welcomeNote2", {}, {locale: lang}) }}<br/>
-    <a class="example-link" @click="openLink">{{ t("Examples", {}, {locale: lang}) }}</a>
     <p class="note" v-if="version" style="text-align: center">
       {{ t("Version", {}, {locale: lang}) }} {{ version }}
     </p>
