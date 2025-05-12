@@ -21,7 +21,7 @@ jobs:
       id: download-artifact
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        name: berlin.giz.Quba-x86_64
+        name: berlin.giz.Quba-x86_64.flatpak
     - name: Release
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
