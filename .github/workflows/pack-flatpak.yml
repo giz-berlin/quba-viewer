@@ -1,0 +1,30 @@
+# See https://github.com/flatpak/flatpak-github-actions/blob/79327416609af08178ad73b352877e51450790b3/README.md
+
+name: Pack Flatpak
+on: [push]
+
+jobs:
+  pack-flatpak:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-26.08
+      options: --privileged
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+      # - name: Install System Dependencies
+      #   run: sudo apt-get update && sudo apt-get install -y fakeroot
+      #   # run: sudo apt-get update && sudo apt-get install -y flatpak flatpak-builder fakeroot
+      - name: Install Java Dependencies
+        run: ./init-jdk.sh
+      - name: Build Quba .jar file
+        run: source ./env.sh && ./gradlew createReleaseDistributable
+      - name: Prepare archive
+        run: tar czf quba.tar.gz manager/build/compose/binaries/main-release/app
+      - name: Build Quba .flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: berlin.giz.Quba-2.flatpak
+          manifest-path: flatpak/berlin.giz.Quba-2.yml
+          upload-artifact: true
+          artifact-name: berlin.giz.Quba-2.flatpak

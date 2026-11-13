@@ -1,0 +1,28 @@
+FROM dr.rechenknecht.net/bauhelfer/container/main/flatpak:latest
+
+ARG REMOTE_USER=developer
+ARG REMOTE_UID=992
+ARG REMOTE_GID=992
+
+RUN groupadd --gid $REMOTE_GID $REMOTE_USER \
+    && useradd --uid $REMOTE_UID --gid $REMOTE_GID -m $REMOTE_USER -s /bin/bash -d /home/developer
+
+# Allow calling sudo in devcontainer (e.g. to install additional packages), enable if required
+# RUN apt-get update && apt-get install -y sudo
+# RUN echo $REMOTE_USER ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$REMOTE_USER
+
+# update software repos
+RUN apt-get update \
+# ugrade software
+    && apt-get -y upgrade \
+    && apt-get -y install apt-utils \
+# install some useful tools
+    && apt-get -y install \
+        fakeroot \
+# clean up
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# This must be the last step as the REMOTE_UID is not set here, apparently it is not possible
+# to setup users properly during container build.
+USER $REMOTE_USER

@@ -175,6 +175,18 @@ kotlin {
     }
 }
 
+// Sources: https://stackoverflow.com/a/73614626, https://stackoverflow.com/a/66833743,
+// https://stackoverflow.com/questions/34855649/invalid-signature-file-digest-for-manifest-main-attributes-exception-while-tryin#comment122560802_66833743
+//
+// Some dependencies use signed jars.
+// As we re-package them, the signatures no longer match.
+// We thus remove the signatures.
+tasks {
+    withType<org.gradle.jvm.tasks.Jar> {
+        exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
+    }
+}
+
 compose.desktop {
     application {
         mainClass = "de.openindex.zugferd.manager.MainKt"

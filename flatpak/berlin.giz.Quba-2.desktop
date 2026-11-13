@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Quba 2
+Exec=/app/share/manager/build/compose/binaries/main-release/app/Quba/bin/Quba
+Type=Application
+Icon=berlin.giz.Quba-2
+Categories=Office;

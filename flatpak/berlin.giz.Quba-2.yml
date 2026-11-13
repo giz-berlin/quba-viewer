@@ -1,0 +1,84 @@
+# Inspired by https://github.com/flathub/com.jetpackduba.Gitnuro/blob/7dc2da8d1fa8a0ea2302d9e668d619e9c17289c1/com.jetpackduba.Gitnuro.yml.
+
+app-id: berlin.giz.Quba-2
+runtime: org.freedesktop.Platform
+runtime-version: '26.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk21
+command: /app/share/manager/build/compose/binaries/main-release/app/Quba/bin/Quba
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --filesystem=host:ro
+  - --socket=system-bus
+  # - --socket=x11
+  # - --share=ipc
+  # - --share=network
+  # - --filesystem=host
+  # - --filesystem=xdg-run/gnupg
+  # - --device=dri
+  # - --socket=gpg-agent
+  # - --talk-name=org.freedesktop.Flatpak
+  # - --socket=ssh-auth
+modules:
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk21/install.sh
+  - name: quba
+    buildsystem: simple
+    build-commands:
+      - install -D quba.tar.gz /app/share/quba.tar.gz
+      - pushd /app/share/ && tar xzf quba.tar.gz && rm quba.tar.gz && popd
+      - install -D berlin.giz.Quba-2.desktop /app/share/applications/berlin.giz.Quba-2.desktop
+      - install -D icon_16x16.png /app/share/icons/hicolor/16x16/apps/berlin.giz.Quba-2.png
+      - install -D icon_16x16@2x.png /app/share/icons/hicolor/16x16@2x/apps/berlin.giz.Quba-2.png
+      - install -D icon_32x32.png /app/share/icons/hicolor/32x32/apps/berlin.giz.Quba-2.png
+      - install -D icon_32x32@2x.png /app/share/icons/hicolor/32x32@2x/apps/berlin.giz.Quba-2.png
+      - install -D icon_128x128.png /app/share/icons/hicolor/128x128/apps/berlin.giz.Quba-2.png
+      - install -D icon_128x128@2x.png /app/share/icons/hicolor/128x128@2x/apps/berlin.giz.Quba-2.png
+      - install -D icon_256x256.png /app/share/icons/hicolor/256x256/apps/berlin.giz.Quba-2.png
+      - install -D icon_256x256@2x.png /app/share/icons/hicolor/256x256@2x/apps/berlin.giz.Quba-2.png
+      - install -D icon_512x512.png /app/share/icons/hicolor/512x512/apps/berlin.giz.Quba-2.png
+      # - install -D icon_512x512@2x.png /app/share/icons/hicolor/512x512@2x/apps/berlin.giz.Quba-2.png
+      # - install -D berlin.giz.Quba-2.metainfo.xml /app/share/appdata/berlin.giz.Quba-2.metainfo.xml
+    sources:
+      - type: file
+        path: ../quba.tar.gz
+        dest-filename: quba.tar.gz
+      - type: file
+        path: berlin.giz.Quba-2.desktop
+      - type: file
+        path: ../share/icons/application.iconset/icon_16x16.png
+        dest-filename: icon_16x16.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_16x16@2x.png
+        dest-filename: icon_16x16@2x.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_32x32.png
+        dest-filename: icon_32x32.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_32x32@2x.png
+        dest-filename: icon_32x32@2x.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_128x128.png
+        dest-filename: icon_128x128.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_128x128@2x.png
+        dest-filename: icon_128x128@2x.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_256x256.png
+        dest-filename: icon_256x256.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_256x256@2x.png
+        dest-filename: icon_256x256@2x.png
+      - type: file
+        path: ../share/icons/application.iconset/icon_512x512.png
+        dest-filename: icon_512x512.png
+      # Max icon size is 512x512
+      # - type: file
+      #   path: ../share/icons/application.iconset/icon_512x512@2x.png
+      #   dest-filename: icon_512x512@2x.png
+      # - type: file
+      #   path: berlin.giz.Quba-2.metainfo.xml

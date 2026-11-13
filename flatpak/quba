@@ -1,0 +1,3 @@
+#/bin/sh
+# TODO: Remove file
+/app/jre/bin/java -jar /app/share/Quba.jar --flatpak

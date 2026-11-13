@@ -1,0 +1,20 @@
+// README at: https://github.com/devcontainers/templates/tree/main/src/rust
+{
+    "name": "Quba Gradle",
+    "build": {
+        // Path is relative to the devcontainer.json file.
+        "dockerfile": "Containerfile",
+        "args": {
+            "REMOTE_USER": "${localEnv:USER:developer}"
+        }
+    },
+    "updateRemoteUserUID": true,
+    "postStartCommand": "./init-jdk.sh && echo \"source $(pwd)/env.sh\" >> $HOME/.bashrc && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user",
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": []
+        }
+    }
+}
